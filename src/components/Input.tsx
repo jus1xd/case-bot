@@ -1,11 +1,11 @@
-import React from 'react'
+import React, {SetStateAction} from 'react'
 
 type TProps = {
     title?: string,
     placeholder: string,
     hiddenValue?: boolean,
     value: string | number,
-    setValue?: (value: string | number, index?: number) => void,
+    setValue?: React.Dispatch<SetStateAction<any>>,
     disabled?: boolean,
     auth?: boolean
 }

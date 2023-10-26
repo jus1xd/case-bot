@@ -33,16 +33,17 @@ export const casesApi = createApi({
             }),
             providesTags: ['Cases']
         }),
-        createCase: builder.mutation<ICaseResponse, { token: string, body: ICase }>({
+        createCase: builder.mutation<ICaseResponse, { token: string, body: FormData }>({
             query: ({token, body}) => ({
                 url: `/cases/create/`,
-                method: "DELETE",
+                method: "POST",
                 mode: "cors",
                 body: body,
                 headers: {
                     "Authorization": `Token ${token}`
                 }
             }),
+            invalidatesTags: ['Cases']
         }),
         getCaseById: builder.query<ICaseResponse, { token: string, id: number }>({
             query: ({token, id}) => ({
@@ -63,6 +64,7 @@ export const casesApi = createApi({
                     "Authorization": `Token ${token}`
                 }
             }),
+            invalidatesTags: ['Cases']
         }),
         editCaseById: builder.mutation<ICaseResponse, { body: FormData, token: string, id: number }>({
             query: ({token, body, id}) => ({

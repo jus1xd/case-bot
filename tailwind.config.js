@@ -16,7 +16,7 @@ export default {
       darkBg: "#1f1f23",
       darkColor: "#2d2d34",
       red: '#ff2424',
-      redOpacity: '#ff242440'
+      redOpacity: '#ff242420'
     },
     extend: {},
   },

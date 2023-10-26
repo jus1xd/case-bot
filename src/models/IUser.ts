@@ -4,7 +4,7 @@ export interface IAuthUser {
 }
 
 export interface IUser {
-    id: number,
+    id?: number,
     username: string,
     balance: number,
     marsians: number,

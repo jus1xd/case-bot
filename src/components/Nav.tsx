@@ -17,6 +17,10 @@ const Nav = () => {
             navHref: '/users'
         },
         {
+            navTitle: 'Категории',
+            navHref: '/categories'
+        },
+        {
             navTitle: 'VIP',
             navHref: '/vip'
         },
@@ -41,13 +45,15 @@ const Nav = () => {
                     <div className={'flex'}>
                         {
                             navLinks.map((el, index) => (
-                                    <NavLink key={index} to={el.navHref} className={'cursor-pointer p-3 rounded-lg hover:bg-darkBg ml-4'}>
+                                    <NavLink key={index} to={el.navHref}
+                                             className={'cursor-pointer font-semibold px-3 flex items-center rounded-lg hover:bg-darkBg ml-4'}>
                                         {el.navTitle}
                                     </NavLink>
                                 )
                             )
                         }
-                        <div onClick={logout} className={'cursor-pointer p-3 rounded-lg text-red hover:bg-redOpacity ml-4'}>
+                        <div onClick={logout}
+                             className={'cursor-pointer p-3 rounded-lg text-red font-semibold hover:bg-redOpacity ml-4'}>
                             Выйти
                         </div>
                     </div>

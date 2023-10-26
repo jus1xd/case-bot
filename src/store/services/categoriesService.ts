@@ -1,40 +1,41 @@
 // Need to use the React-specific entry point to import createApi
 import {createApi, fetchBaseQuery} from "@reduxjs/toolkit/query/react";
-import {ISkin} from "../../models/ISkin.ts";
+import {ICategory} from "../../models/ICategory.ts";
 
 // Define a service using a base URL and expected endpoints
 const baseUrl = "http://a1160b57c96.vps.myjino.ru:49423" || import.meta.env.API_BASE_URL;
 
-interface ISkinsResponse {
+interface ICategoriesResponse {
     status: string,
-    skins: ISkin[]
+    categories: ICategory[]
 }
 
-interface ISkinResponse {
+interface ICategoryResponse {
     status: string,
-    skin: ISkin
+    case: ICategory
 }
 
-export const skinsApi = createApi({
-    reducerPath: "skinsApi",
+export const categoriesApi = createApi({
+    reducerPath: "categoriesApi",
     baseQuery: fetchBaseQuery({
         baseUrl: baseUrl,
     }),
-    tagTypes: ["Users"],
+    tagTypes: ["Categories"],
     endpoints: (builder) => ({
-        getSkins: builder.query<ISkinsResponse, string>({
+        getCategories: builder.query<ICategoriesResponse, string>({
             query: (token) => ({
-                url: `/skins/`,
+                url: `/category/`,
                 method: "GET",
                 mode: "cors",
                 headers: {
                     "Authorization": `Token ${token}`
                 }
             }),
+            providesTags: ['Categories']
         }),
-        createSkin: builder.mutation<ISkinResponse, { token: string, body: FormData}>({
+        createCategory: builder.mutation<ICategoryResponse, { token: string, body: ICategory }>({
             query: ({token, body}) => ({
-                url: `/skins/create/`,
+                url: `/category/create/`,
                 method: "POST",
                 mode: "cors",
                 body: body,
@@ -42,10 +43,11 @@ export const skinsApi = createApi({
                     "Authorization": `Token ${token}`
                 }
             }),
+            invalidatesTags: ['Categories']
         }),
-        getSkinById: builder.query<ISkinResponse, { token: string, id: number }>({
+        getCategoryById: builder.query<ICategoryResponse, { token: string, id: number }>({
             query: ({token, id}) => ({
-                url: `/skins/${id}/`,
+                url: `/category/${id}/`,
                 method: "GET",
                 mode: "cors",
                 headers: {
@@ -53,19 +55,20 @@ export const skinsApi = createApi({
                 }
             }),
         }),
-        deleteSkinById: builder.mutation<ISkinResponse, { token: string, id: number }>({
+        deleteCategoryById: builder.mutation<ICategoryResponse, { token: string, id: number }>({
             query: ({token, id}) => ({
-                url: `/skins/${id}/delete/`,
+                url: `/category/${id}/delete/`,
                 method: "DELETE",
                 mode: "cors",
                 headers: {
                     "Authorization": `Token ${token}`
                 }
             }),
+            invalidatesTags: ['Categories']
         }),
-        editSkinById: builder.mutation<ISkinResponse, { body: FormData, token: string, id: number }>({
+        editCategoryById: builder.mutation<ICategoryResponse, { body: ICategory, token: string, id: number }>({
             query: ({token, body, id}) => ({
-                url: `/skins/${id}/patch/`,
+                url: `/category/${id}/patch/`,
                 method: "PATCH",
                 mode: "cors",
                 body: body,
@@ -73,6 +76,7 @@ export const skinsApi = createApi({
                     "Authorization": `Token ${token}`
                 }
             }),
+            invalidatesTags: ['Categories']
         }),
     }),
 });
