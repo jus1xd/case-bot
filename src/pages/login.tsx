@@ -25,6 +25,7 @@ const Login = () => {
             ).then((res: any) => {
                     console.log(res)
                     if (res.error) {
+                        setIsLoading(false)
                         setIsError('HTTP Error: ' + res.error.status)
                     } else if (res.data.token) {
                         localStorage.setItem('token', res.data.token)

@@ -16,6 +16,16 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
 
     const [createCase] = casesApi.useCreateCaseMutation()
 
+    function stringToArray(numbersString: string): number[] {
+        // Разделение строки на числа с помощью метода split()
+        const numbersArray: string[] = numbersString.split(',');
+
+        // Преобразование каждого элемента массива в числовой тип данных
+        const parsedNumbers: number[] = numbersArray.map((num) => parseInt(num));
+
+        return parsedNumbers;
+    }
+
     const createHandler = () => {
         let skinsArrayValue = skinsArrayRef.current.value
         console.log(skinsArrayValue)
@@ -24,15 +34,16 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
             && price.toString().trim()
             && skinsArrayValue
         ) {
+            const result = stringToArray(skinsArrayValue);
+
             const fd = new FormData()
             fd.append('image', image)
             fd.append('name', name)
             fd.append('price', price.toString())
             fd.append('category', category.toString())
-
-            for (let char in skinsArrayValue) {
-                fd.append('skins', skinsArrayValue[char])
-            }
+            console.log(result)
+            console.log(skinsArrayValue)
+            result.map(el => fd.append('skins', el.toString()))
 
             createCase({token, body: fd}).then(() => {
                 setCategory(0)
@@ -60,7 +71,7 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
                 <Input title={'Цена'} placeholder={'Цена'} value={price} setValue={setPrice}/>
                 <Input title={'Категория'} placeholder={'Категория'} value={category} setValue={setCategory}/>
                 <input className={'mt-3 placeholder:text-sm w-full py-1 px-4 outline-none rounded-lg bg-[#D3CAFF1A]'}
-                       placeholder={'SkinID без пробелов'} ref={skinsArrayRef} type="number"/>
+                       placeholder={'SkinID через запятую'} ref={skinsArrayRef} type="text"/>
             </div>
             <div className="mt-5">
                 <input id={'casePhoto'} type={'file'} className={'appearance-none hidden mb-3'}
