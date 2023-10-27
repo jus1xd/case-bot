@@ -23,7 +23,6 @@ const Login = () => {
             getToken(
                 {username, password}
             ).then((res: any) => {
-                    console.log(res)
                     if (res.error) {
                         setIsLoading(false)
                         setIsError('HTTP Error: ' + res.error.status)

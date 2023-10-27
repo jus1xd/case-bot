@@ -20,7 +20,7 @@ const UserCard: React.FC<{ token: string, data: IUser }> = ({token, data}) => {
     const [editUserById] = usersApi.useEditUserByIdMutation()
 
     const deleteHandler = () => {
-        deleteUserById({token, id: data.id || -1}).then(res => console.log(res))
+        deleteUserById({token, id: data.id || -1})
     }
 
     const saveChangesHandler = () => {

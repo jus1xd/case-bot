@@ -16,7 +16,7 @@ const SkinCard: React.FC<{ token: string, data: ISkin }> = ({token, data}) => {
     const [deleteSkinById] = skinsApi.useDeleteSkinByIdMutation()
 
     const deleteHandler = () => {
-        deleteSkinById({token, id: data.id}).then(res => console.log(res))
+        deleteSkinById({token, id: data.id})
     }
 
     const saveChangesHandler = () => {

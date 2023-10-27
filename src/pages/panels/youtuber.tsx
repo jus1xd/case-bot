@@ -6,13 +6,9 @@ const Youtuber = () => {
     const token = localStorage.getItem('token') || ''
     const fetchYoutuber = youtuberApi.useGetYoutuberQuery(token)
 
-    useEffect(() => {
-        console.log(fetchYoutuber)
-    }, [fetchYoutuber]);
-
     return (
         <div>
-            <div className="flex justify-between">
+            <div className="flex">
                 <h1 className={'text-xl font-semibold mb-3'}>YOUTUBER</h1>
             </div>
             <div className="flex flex-wrap">

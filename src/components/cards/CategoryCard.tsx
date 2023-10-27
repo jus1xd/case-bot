@@ -12,7 +12,7 @@ const CategoryCard: React.FC<{ token: string, data: ICategory }> = ({token, data
     const [editCategoryById] = categoriesApi.useEditCategoryByIdMutation()
 
     const deleteHandler = () => {
-        deleteCategoryById({token, id: data.id || 0}).then(res => console.log(res))
+        deleteCategoryById({token, id: data.id || 0})
     }
 
     const saveChangesHandler = () => {
@@ -21,8 +21,6 @@ const CategoryCard: React.FC<{ token: string, data: ICategory }> = ({token, data
             setEditingMode(false)
         }
     }
-
-    console.log('some')
 
     return (
         <div>

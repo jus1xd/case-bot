@@ -6,10 +6,6 @@ const Vip = () => {
     const token = localStorage.getItem('token') || ''
     const fetchVip = vipApi.useGetVipQuery(token)
 
-    useEffect(() => {
-        console.log(fetchVip)
-    }, [fetchVip]);
-
     return (
         <div>
             <div className="flex justify-between">

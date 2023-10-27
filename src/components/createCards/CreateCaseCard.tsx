@@ -12,6 +12,7 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
     const [image, setImage] = useState<File | null>(null)
     const [name, setName] = useState<string>('')
     const [price, setPrice] = useState<number>(50)
+    const [marsians, setMarsians] = useState<number>(10)
     const [category, setCategory] = useState<number>(1)
 
     const [createCase] = casesApi.useCreateCaseMutation()
@@ -28,10 +29,10 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
 
     const createHandler = () => {
         let skinsArrayValue = skinsArrayRef.current.value
-        console.log(skinsArrayValue)
         if (image &&
             name.trim()
             && price.toString().trim()
+            && marsians.toString().trim()
             && skinsArrayValue
         ) {
             const result = stringToArray(skinsArrayValue);
@@ -40,9 +41,8 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
             fd.append('image', image)
             fd.append('name', name)
             fd.append('price', price.toString())
+            fd.append('marsians', marsians.toString())
             fd.append('category', category.toString())
-            console.log(result)
-            console.log(skinsArrayValue)
             result.map(el => fd.append('skins', el.toString()))
 
             createCase({token, body: fd}).then(() => {
@@ -69,6 +69,7 @@ const CreateCaseCard: React.FC<TProps> = ({token}) => {
                 </div>
                 <Input title={'Название'} placeholder={'Название'} value={name} setValue={setName}/>
                 <Input title={'Цена'} placeholder={'Цена'} value={price} setValue={setPrice}/>
+                <Input title={'Марсианинов'} placeholder={'Марсианинов'} value={marsians} setValue={setMarsians}/>
                 <Input title={'Категория'} placeholder={'Категория'} value={category} setValue={setCategory}/>
                 <input className={'mt-3 placeholder:text-sm w-full py-1 px-4 outline-none rounded-lg bg-[#D3CAFF1A]'}
                        placeholder={'SkinID через запятую'} ref={skinsArrayRef} type="text"/>

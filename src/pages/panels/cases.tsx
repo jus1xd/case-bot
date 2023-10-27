@@ -12,7 +12,7 @@ const Cases = () => {
                 <h1 className={'text-xl font-semibold mb-3'}>Кейсы</h1>
                 <h1 className={'text-lg opacity-70  mb-3'}>сортировка - сначала новые</h1>
             </div>
-            <div className="flex justify-between flex-wrap">
+            <div className="flex flex-wrap">
                 <CreateCard entityProps={'CASES'} />
                 {
                     fetchCases && fetchCases.slice().reverse().map(el => (
